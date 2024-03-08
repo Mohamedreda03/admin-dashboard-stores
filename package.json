@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prisma:generate": "prisma generate",
+    "vercel-build": "npm run prisma:generate && next build"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.9",
