@@ -13,6 +13,8 @@ export default function colorClient({ data }: { data: ColorColumn[] }) {
   const router = useRouter();
   const params = useParams();
 
+  const redirectToNew = () => router.push(`/${params.storeId}/colors/new`);
+
   return (
     <>
       <div className="flex items-center justify-between">
@@ -20,7 +22,7 @@ export default function colorClient({ data }: { data: ColorColumn[] }) {
           title={`Colors (${data.length})`}
           description="Manage colors for your store"
         />
-        <Button onClick={() => router.push(`/${params.storeId}/colors/new`)}>
+        <Button onClick={redirectToNew}>
           <Plus className="h-4 w-4 mr-2" />
           Add New
         </Button>
