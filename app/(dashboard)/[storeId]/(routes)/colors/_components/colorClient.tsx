@@ -1,17 +1,26 @@
 "use client";
 
-import Heading from "@/components/ui/Heading";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
+
+import { Plus } from "lucide-react";
 import { ColorColumn, columns } from "./columns";
 import { Separator } from "@/components/ui/separator";
 import { DataTable } from "@/components/ui/data-table";
 import ApiList from "@/components/ui/api-list";
+import Heading from "@/components/ui/Heading";
+import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
 export default function colorClient({ data }: { data: ColorColumn[] }) {
+  const [isMounted, setIsMounted] = useState(false);
   const params = useParams();
   const router = useRouter();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
 
   return (
     <>
