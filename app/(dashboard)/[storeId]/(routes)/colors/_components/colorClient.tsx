@@ -8,10 +8,18 @@ import { ColorColumn, columns } from "./columns";
 import { Separator } from "@/components/ui/separator";
 import { DataTable } from "@/components/ui/data-table";
 import ApiList from "@/components/ui/api-list";
+import { useEffect, useState } from "react";
 
 export default function colorClient({ data }: { data: ColorColumn[] }) {
+  const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
   const params = useParams();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
 
   const redirectToNew = () => router.push(`/${params.storeId}/colors/new`);
 
