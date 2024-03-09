@@ -30,13 +30,13 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
   };
 
   const onEdit = (id: string) => {
-    router.push(`/${params.storeId}/billboards/${id}`);
+    router.push(`/${params.storeId}/billboards/${data.id}`);
   };
 
-  const onDelete = async (id: string) => {
+  const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/${params.storeId}/billboards/${id}`);
+      await axios.delete(`/api/${params.storeId}/billboards/${data.id}`);
 
       router.refresh();
 
@@ -54,7 +54,7 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
         isOpen={open}
         loading={loading}
         onClose={() => setOpen(false)}
-        onConfirm={() => onDelete(data.id)}
+        onConfirm={onDelete}
       />
       <DropdownMenu>
         <DropdownMenuTrigger>

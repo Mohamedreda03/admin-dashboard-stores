@@ -66,8 +66,6 @@ export async function GET(
       },
     });
 
-    console.log(categories);
-
     return NextResponse.json(categories);
   } catch (error) {
     console.log("[CATEGORY_GET]:", error);

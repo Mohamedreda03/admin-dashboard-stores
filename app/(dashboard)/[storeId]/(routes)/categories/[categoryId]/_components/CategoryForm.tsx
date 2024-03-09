@@ -100,7 +100,7 @@ export default function CategoryForm({
 
       toast.success("Billboard deleted.");
     } catch (error) {
-      toast.error("Make sure you removed all products and categories first.");
+      toast.error("Make sure you removed this category.");
     } finally {
       setLoading(false);
     }
