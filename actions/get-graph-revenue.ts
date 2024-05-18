@@ -1,14 +1,97 @@
 import prismadb from "@/lib/prismadb";
 
-const getStockCount = async (storeId: string) => {
-  const stockCount = await prismadb.product.count({
+interface GraphData {
+  name: string;
+  total: number;
+}
+
+const getGraphRevenue = async (storeId: string) => {
+  const paidOrders = await prismadb.order.findMany({
     where: {
       storeId,
-      isArchived: false,
+      isPaid: true,
+    },
+    include: {
+      orderItems: {
+        include: {
+          product: true,
+        },
+      },
     },
   });
 
-  return stockCount;
+  const monthlyRevenue: { [key: number]: number } = {};
+
+  for (const order of paidOrders) {
+    const month = order.createdAt.getMonth();
+    const revenueForOrder = order.orderItems.reduce(
+      (acc, item) => acc + item.product.price.toNumber(),
+      0
+    );
+
+    if (monthlyRevenue[month]) {
+      monthlyRevenue[month] += revenueForOrder;
+    } else {
+      monthlyRevenue[month] = revenueForOrder;
+    }
+  }
+
+  const graphData: GraphData[] = [
+    {
+      name: "Jan",
+      total: 0,
+    },
+    {
+      name: "Feb",
+      total: 0,
+    },
+    {
+      name: "Mar",
+      total: 0,
+    },
+    {
+      name: "Apr",
+      total: 0,
+    },
+    {
+      name: "May",
+      total: 0,
+    },
+    {
+      name: "Jun",
+      total: 0,
+    },
+    {
+      name: "Jul",
+      total: 0,
+    },
+    {
+      name: "Aug",
+      total: 0,
+    },
+    {
+      name: "Sep",
+      total: 0,
+    },
+    {
+      name: "Oct",
+      total: 0,
+    },
+    {
+      name: "Nov",
+      total: 0,
+    },
+    {
+      name: "Dec",
+      total: 0,
+    },
+  ];
+
+  for (const month in monthlyRevenue) {
+    graphData[parseInt(month)].total = monthlyRevenue[parseInt(month)];
+  }
+
+  return graphData;
 };
 
-export default getStockCount;
+export default getGraphRevenue;
