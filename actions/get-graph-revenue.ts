@@ -25,7 +25,7 @@ const getGraphRevenue = async (storeId: string) => {
   for (const order of paidOrders) {
     const month = order.createdAt.getMonth();
     const revenueForOrder = order.orderItems.reduce(
-      (acc, item) => acc + item.product.price.toNumber(),
+      (acc, item) => acc + Number(item.product.price),
       0
     );
 
