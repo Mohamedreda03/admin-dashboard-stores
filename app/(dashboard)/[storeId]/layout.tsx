@@ -10,25 +10,29 @@ export default async function layout({
   children: React.ReactNode;
   params: { storeId: string };
 }) {
-  const { userId } = auth();
-  if (!userId) {
-    redirect("/sign-in");
-  }
+  try {
+    const { userId } = auth();
+    if (!userId) {
+      redirect("/sign-in");
+    }
 
-  const store = await prisma.store.findFirst({
-    where: {
-      id: params.storeId,
-      userId,
-    },
-  });
+    const store = await prisma.store.findFirst({
+      where: {
+        id: params.storeId,
+        userId,
+      },
+    });
 
-  if (!store) {
-    redirect("/");
+    if (!store) {
+      redirect("/");
+    }
+    return (
+      <>
+        <Navbar />
+        {children}
+      </>
+    );
+  } catch (error) {
+    console.log(error);
   }
-  return (
-    <>
-      <Navbar />
-      {children}
-    </>
-  );
 }
