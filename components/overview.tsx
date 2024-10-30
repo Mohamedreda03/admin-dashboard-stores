@@ -7,7 +7,7 @@ interface OverviewProps {
   data: any[];
 }
 
-export const Overview: React.FC<OverviewProps> = ({ data }) => {
+export const Overview: React.FC<OverviewProps> = ({ data = [] }) => {
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
     setIsMounted(true);
