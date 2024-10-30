@@ -17,7 +17,7 @@ const getTotalRevenue = async (storeId: string) => {
 
   const totalRevenue = paidOrders.reduce((acc, order) => {
     const revenueForOrder = order.orderItems.reduce(
-      (acc, item) => acc + item.product.price.toNumber(),
+      (acc, item) => acc + Number(item.product.price),
       0
     );
     return acc + revenueForOrder;
