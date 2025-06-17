@@ -7,11 +7,16 @@ export default async function SizePage({
 }: {
   params: { sizeId: string };
 }) {
-  const size: any = await prisma.size.findUnique({
-    where: {
-      id: params.sizeId,
-    },
-  });
+  let size: Size | null = null;
+  
+  // Only fetch size if sizeId is not "new"
+  if (params.sizeId !== "new") {
+    size = await prisma.size.findUnique({
+      where: {
+        id: params.sizeId,
+      },
+    });
+  }
   return (
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">

@@ -28,21 +28,20 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
     navigator.clipboard.writeText(id);
     toast.success("Billboard Id copied to the clipboard.");
   };
-
   const onEdit = (id: string) => {
-    router.push(`/${params.storeId}/billboards/${id}`);
+    router.push(`/${params.storeId}/sizes/${id}`);
   };
 
   const onDelete = async (id: string) => {
     try {
       setLoading(true);
-      await axios.delete(`/api/${params.storeId}/billboards/${id}`);
+      await axios.delete(`/api/${params.storeId}/sizes/${id}`);
 
       router.refresh();
 
-      toast.success("Billboard deleted.");
+      toast.success("Size deleted.");
     } catch (error) {
-      toast.error("Make sure you removed all products and categories first.");
+      toast.error("Make sure you removed all products using this size first.");
     } finally {
       setLoading(false);
     }

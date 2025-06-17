@@ -52,7 +52,7 @@ model Size {
   store     Store     @relation("StoreToSize", fields: [storeId], references: [id])
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  products  Product[] @relation("CategoryToSize")
+  products  Product[] @relation("SizeToProduct")
 }
 
 model Color {
@@ -63,7 +63,7 @@ model Color {
   store     Store     @relation("StoreToColor", fields: [storeId], references: [id])
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  products  Product[] @relation("CategoryToSize")
+  products  Product[] @relation("ColorToProduct")
 }
 
 model Product {
@@ -77,10 +77,10 @@ model Product {
   isFeatured Boolean     @default(false)
   isArchived Boolean     @default(false)
   sizeId     String      @db.ObjectId
-  size       Size        @relation("CategoryToSize", fields: [sizeId], references: [id])
+  size       Size        @relation("SizeToProduct", fields: [sizeId], references: [id])
   colorId    String      @db.ObjectId
-  color      Color       @relation("CategoryToSize", fields: [colorId], references: [id])
-  images     Image[]     @relation("ImageToCategory")
+  color      Color       @relation("ColorToProduct", fields: [colorId], references: [id])
+  images     Image[]     @relation("ImageToProduct")
   orderItems OrderItem[] @relation("ProductToOrderItems")
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
@@ -89,7 +89,7 @@ model Product {
 model Image {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   productId String   @db.ObjectId
-  product   Product  @relation("ImageToCategory", fields: [productId], references: [id])
+  product   Product  @relation("ImageToProduct", fields: [productId], references: [id])
   url       String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

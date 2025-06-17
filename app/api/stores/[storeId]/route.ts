@@ -50,9 +50,7 @@ export async function DELETE(
 
     if (!params.storeId) {
       return new NextResponse("Store id is Required", { status: 400 });
-    }
-
-    const store = await prisma.store.delete({
+    }    const store = await prisma.store.delete({
       where: {
         id: params.storeId,
         userId,
@@ -61,6 +59,7 @@ export async function DELETE(
 
     return NextResponse.json(store);
   } catch (error) {
-    console.log("[STORE_PATCH]:", error);
+    console.log("[STORE_DELETE]:", error);
+    return new NextResponse("Internal Server Error", { status: 500 });
   }
 }

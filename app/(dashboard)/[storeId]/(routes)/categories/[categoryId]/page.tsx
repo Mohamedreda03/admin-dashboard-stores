@@ -6,13 +6,18 @@ export default async function CategoryPage({
 }: {
   params: { categoryId: string; storeId: string };
 }) {
-  const category: any = await prisma.category.findUnique({
-    where: {
-      id: params.categoryId,
-    },
-  });
+  let category = null;
+  
+  // Only fetch category if categoryId is not "new"
+  if (params.categoryId !== "new") {
+    category = await prisma.category.findUnique({
+      where: {
+        id: params.categoryId,
+      },
+    });
+  }
 
-  const billboards: any = await prisma.billboard.findMany({
+  const billboards = await prisma.billboard.findMany({
     where: {
       storeId: params.storeId,
     },

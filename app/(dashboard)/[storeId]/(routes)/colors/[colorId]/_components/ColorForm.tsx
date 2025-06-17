@@ -61,11 +61,10 @@ export default function ColorForm({
   });
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    try {
-      setLoading(true);
+    try {      setLoading(true);
       if (initialData) {
         await axios.patch(
-          `/api/${params.storeId}/colors/${params.sizeId}`,
+          `/api/${params.storeId}/colors/${params.colorId}`,
           data
         );
       } else {
@@ -85,14 +84,13 @@ export default function ColorForm({
 
   const onDelete = async () => {
     try {
-      setLoading(true);
-      await axios.delete(`/api/${params.storeId}/colors/${params.sizeId}`);
+      setLoading(true);      await axios.delete(`/api/${params.storeId}/colors/${params.colorId}`);
       router.push(`/${params.storeId}/colors`);
       router.refresh();
 
       toast.success("Color deleted.");
     } catch (error) {
-      toast.error("Make sure you removed all products using this size first.");
+      toast.error("Make sure you removed all products using this color first.");
     } finally {
       setLoading(false);
     }

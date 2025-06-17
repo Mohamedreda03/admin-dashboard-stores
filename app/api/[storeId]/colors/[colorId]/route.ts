@@ -15,11 +15,10 @@ export async function GET(
       where: {
         id: params.colorId,
       },
-    });
-
-    return NextResponse.json(color);
+    });    return NextResponse.json(color);
   } catch (error) {
     console.log("[COLOR_GET]:", error);
+    return new NextResponse("Internal Server Error", { status: 500 });
   }
 }
 
@@ -72,9 +71,9 @@ export async function PATCH(
       },
     });
 
-    return NextResponse.json(color);
-  } catch (error) {
+    return NextResponse.json(color);  } catch (error) {
     console.log("[COLOR_PATCH]:", error);
+    return new NextResponse("Internal Server Error", { status: 500 });
   }
 }
 
@@ -113,10 +112,9 @@ export async function DELETE(
         id: params.colorId,
         storeId: params.storeId,
       },
-    });
-
-    return NextResponse.json(color);
+    });    return NextResponse.json(color);
   } catch (error) {
     console.log("[COLOR_DELETE]:", error);
+    return new NextResponse("Internal Server Error", { status: 500 });
   }
 }

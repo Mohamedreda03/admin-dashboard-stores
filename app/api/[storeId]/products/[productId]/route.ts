@@ -21,11 +21,10 @@ export async function GET(
         color: true,
         size: true,
       },
-    });
-
-    return NextResponse.json(product);
+    });    return NextResponse.json(product);
   } catch (error) {
     console.log("[PRODUCT_GET]:", error);
+    return new NextResponse("Internal Server Error", { status: 500 });
   }
 }
 
@@ -118,16 +117,15 @@ export async function PATCH(
           },
         },
       },
-    });
-
-    return NextResponse.json(product);
+    });    return NextResponse.json(product);
   } catch (error) {
-    console.log("[BILLBOARD_PATCH]:", error);
+    console.log("[PRODUCT_PATCH]:", error);
+    return new NextResponse("Internal Server Error", { status: 500 });
   }
 }
 export async function DELETE(
   req: Request,
-  { params }: { params: { storeId: string; billboardId: string } }
+  { params }: { params: { storeId: string; productId: string } }
 ) {
   try {
     const { userId } = auth();
@@ -140,8 +138,8 @@ export async function DELETE(
       return new NextResponse("Store id is Required", { status: 400 });
     }
 
-    if (!params.billboardId) {
-      return new NextResponse("Billboard id is Required", { status: 400 });
+    if (!params.productId) {
+      return new NextResponse("Product id is Required", { status: 400 });
     }
 
     const storeByUser = await prisma.store.findFirst({
@@ -157,13 +155,14 @@ export async function DELETE(
 
     const product = await prisma.product.delete({
       where: {
-        id: params.billboardId,
+        id: params.productId,
         storeId: params.storeId,
       },
     });
 
     return NextResponse.json(product);
   } catch (error) {
-    console.log("[Billboard_DELETE]:", error);
+    console.log("[PRODUCT_DELETE]:", error);
+    return new NextResponse("Internal Server Error", { status: 500 });
   }
 }

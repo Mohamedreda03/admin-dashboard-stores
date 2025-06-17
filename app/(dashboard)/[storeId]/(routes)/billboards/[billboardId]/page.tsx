@@ -7,11 +7,16 @@ export default async function BillboardPage({
 }: {
   params: { billboardId: string };
 }) {
-  const billboard: any = await prisma.billboard.findUnique({
-    where: {
-      id: params.billboardId,
-    },
-  });
+  let billboard: Billboard | null = null;
+  
+  // Only fetch billboard if billboardId is not "new"
+  if (params.billboardId !== "new") {
+    billboard = await prisma.billboard.findUnique({
+      where: {
+        id: params.billboardId,
+      },
+    });
+  }
   return (
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">

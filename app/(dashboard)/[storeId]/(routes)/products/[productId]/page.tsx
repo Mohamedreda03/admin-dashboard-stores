@@ -6,25 +6,31 @@ export default async function ProductPage({
 }: {
   params: { productId: string; storeId: string };
 }) {
-  const product: any = await prisma.product.findUnique({
-    where: {
-      id: params.productId,
-    },
-    include: {
-      images: true,
-    },
-  });
-  const categories: any = await prisma.category.findMany({
+  let product = null;
+  
+  // Only fetch product if productId is not "new"
+  if (params.productId !== "new") {
+    product = await prisma.product.findUnique({
+      where: {
+        id: params.productId,
+      },
+      include: {
+        images: true,
+      },
+    });
+  }
+  
+  const categories = await prisma.category.findMany({
     where: {
       storeId: params.storeId,
     },
   });
-  const colors: any = await prisma.color.findMany({
+  const colors = await prisma.color.findMany({
     where: {
       storeId: params.storeId,
     },
   });
-  const sizes: any = await prisma.size.findMany({
+  const sizes = await prisma.size.findMany({
     where: {
       storeId: params.storeId,
     },

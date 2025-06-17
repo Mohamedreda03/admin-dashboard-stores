@@ -4,13 +4,18 @@ import ColorForm from "./_components/ColorForm";
 export default async function ColorPage({
   params,
 }: {
-  params: { sizeId: string };
+  params: { colorId: string };
 }) {
-  const color: any = await prisma.color.findFirst({
-    where: {
-      id: params.sizeId,
-    },
-  });
+  let color = null;
+  
+  // Only fetch color if colorId is not "new"
+  if (params.colorId !== "new") {
+    color = await prisma.color.findUnique({
+      where: {
+        id: params.colorId,
+      },
+    });
+  }
   return (
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">
