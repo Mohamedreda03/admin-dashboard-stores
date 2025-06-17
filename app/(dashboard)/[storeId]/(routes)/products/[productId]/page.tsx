@@ -7,7 +7,7 @@ export default async function ProductPage({
   params: { productId: string; storeId: string };
 }) {
   let product = null;
-  
+
   // Only fetch product if productId is not "new"
   if (params.productId !== "new") {
     product = await prisma.product.findUnique({
@@ -19,7 +19,7 @@ export default async function ProductPage({
       },
     });
   }
-  
+
   const categories = await prisma.category.findMany({
     where: {
       storeId: params.storeId,

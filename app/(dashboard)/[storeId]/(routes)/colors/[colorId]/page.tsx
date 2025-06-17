@@ -7,7 +7,7 @@ export default async function ColorPage({
   params: { colorId: string };
 }) {
   let color = null;
-  
+
   // Only fetch color if colorId is not "new"
   if (params.colorId !== "new") {
     color = await prisma.color.findUnique({

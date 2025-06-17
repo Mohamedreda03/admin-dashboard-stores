@@ -8,7 +8,7 @@ export default async function BillboardPage({
   params: { billboardId: string };
 }) {
   let billboard: Billboard | null = null;
-  
+
   // Only fetch billboard if billboardId is not "new"
   if (params.billboardId !== "new") {
     billboard = await prisma.billboard.findUnique({

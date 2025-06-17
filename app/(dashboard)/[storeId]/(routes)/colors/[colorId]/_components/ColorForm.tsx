@@ -61,7 +61,8 @@ export default function ColorForm({
   });
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    try {      setLoading(true);
+    try {
+      setLoading(true);
       if (initialData) {
         await axios.patch(
           `/api/${params.storeId}/colors/${params.colorId}`,
@@ -84,7 +85,8 @@ export default function ColorForm({
 
   const onDelete = async () => {
     try {
-      setLoading(true);      await axios.delete(`/api/${params.storeId}/colors/${params.colorId}`);
+      setLoading(true);
+      await axios.delete(`/api/${params.storeId}/colors/${params.colorId}`);
       router.push(`/${params.storeId}/colors`);
       router.refresh();
 

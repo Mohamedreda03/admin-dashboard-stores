@@ -21,7 +21,8 @@ export async function GET(
         color: true,
         size: true,
       },
-    });    return NextResponse.json(product);
+    });
+    return NextResponse.json(product);
   } catch (error) {
     console.log("[PRODUCT_GET]:", error);
     return new NextResponse("Internal Server Error", { status: 500 });
@@ -117,7 +118,8 @@ export async function PATCH(
           },
         },
       },
-    });    return NextResponse.json(product);
+    });
+    return NextResponse.json(product);
   } catch (error) {
     console.log("[PRODUCT_PATCH]:", error);
     return new NextResponse("Internal Server Error", { status: 500 });

@@ -15,7 +15,8 @@ export async function GET(
       where: {
         id: params.categoryId,
       },
-    });    return NextResponse.json(category);
+    });
+    return NextResponse.json(category);
   } catch (error) {
     console.log("[CATEGORY_GET]:", error);
     return new NextResponse("Internal Server Error", { status: 500 });
@@ -66,7 +67,8 @@ export async function PATCH(
       },
     });
 
-    return NextResponse.json(category);  } catch (error) {
+    return NextResponse.json(category);
+  } catch (error) {
     console.log("[CATEGORY_PATCH]:", error);
     return new NextResponse("Internal Server Error", { status: 500 });
   }
@@ -106,7 +108,8 @@ export async function DELETE(
         id: params.categoryId,
         storeId: params.storeId,
       },
-    });    return NextResponse.json(category);
+    });
+    return NextResponse.json(category);
   } catch (error) {
     console.log("[CATEGORY_DELETE]:", error);
     return new NextResponse("Internal Server Error", { status: 500 });

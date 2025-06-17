@@ -5,14 +5,17 @@
 ## المشاكل التي تم إصلاحها
 
 ### 1. مشاكل Prisma Schema
+
 - تم إصلاح العلاقات بين النماذج (Relations)
 - تم تصحيح أسماء العلاقات في Product, Size, Color, وImage models
 
 ### 2. مشاكل API Routes
+
 - تم إضافة معالجة صحيحة للأخطاء في جميع ملفات API
 - تم إصلاح مشكلة عدم إرجاع استجابة خطأ في catch blocks
 
 ### 3. مشاكل UI Components
+
 - تم إصلاح استخدام params خاطئة في ColorForm
 - تم إصلاح استخدام URLs خاطئة في sizes cell-action
 - تم تصحيح رسائل التوست (toast messages)
@@ -20,6 +23,7 @@
 ## إعداد المشروع
 
 ### 1. متطلبات البيئة
+
 قم بإنشاء ملف `.env.local` في جذر المشروع مع المتغيرات التالية:
 
 ```env
@@ -39,11 +43,13 @@ NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="your_cloudinary_cloud_name"
 ```
 
 ### 2. تثبيت الحزم
+
 ```bash
 npm install
 ```
 
 ### 3. إعداد قاعدة البيانات
+
 ```bash
 # إنشاء Prisma Client
 npx prisma generate
@@ -53,6 +59,7 @@ npx prisma db push
 ```
 
 ### 4. تشغيل المشروع
+
 ```bash
 npm run dev
 ```
@@ -60,14 +67,17 @@ npm run dev
 ## خدمات مطلوبة
 
 ### 1. MongoDB Database
+
 - يمكنك استخدام MongoDB Atlas (مجاني)
 - أو تثبيت MongoDB محلياً
 
 ### 2. Clerk Authentication
+
 - أنشئ حساب على [Clerk.dev](https://clerk.dev)
 - احصل على API keys من dashboard
 
 ### 3. Cloudinary (للصور)
+
 - أنشئ حساب على [Cloudinary](https://cloudinary.com)
 - احصل على Cloud Name
 

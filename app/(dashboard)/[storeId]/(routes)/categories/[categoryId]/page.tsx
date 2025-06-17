@@ -7,7 +7,7 @@ export default async function CategoryPage({
   params: { categoryId: string; storeId: string };
 }) {
   let category = null;
-  
+
   // Only fetch category if categoryId is not "new"
   if (params.categoryId !== "new") {
     category = await prisma.category.findUnique({

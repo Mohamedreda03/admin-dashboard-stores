@@ -15,7 +15,8 @@ export async function GET(
       where: {
         id: params.billboardId,
       },
-    });    return NextResponse.json(billboard);
+    });
+    return NextResponse.json(billboard);
   } catch (error) {
     console.log("[Billboard_GET]:", error);
     return new NextResponse("Internal Server Error", { status: 500 });
@@ -71,7 +72,8 @@ export async function PATCH(
       },
     });
 
-    return NextResponse.json(billboard);  } catch (error) {
+    return NextResponse.json(billboard);
+  } catch (error) {
     console.log("[BILLBOARD_PATCH]:", error);
     return new NextResponse("Internal Server Error", { status: 500 });
   }
@@ -111,7 +113,8 @@ export async function DELETE(
         id: params.billboardId,
         storeId: params.storeId,
       },
-    });    return NextResponse.json(billboard);
+    });
+    return NextResponse.json(billboard);
   } catch (error) {
     console.log("[Billboard_DELETE]:", error);
     return new NextResponse("Internal Server Error", { status: 500 });

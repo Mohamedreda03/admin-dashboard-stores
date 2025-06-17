@@ -8,7 +8,7 @@ export function isValidObjectId(id: string): boolean {
   if (id === "new") {
     return false;
   }
-  
+
   // Check if it's a valid ObjectId format (24 hex characters)
   const objectIdRegex = /^[0-9a-fA-F]{24}$/;
   return objectIdRegex.test(id);

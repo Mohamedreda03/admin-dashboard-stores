@@ -8,7 +8,7 @@ export default async function SizePage({
   params: { sizeId: string };
 }) {
   let size: Size | null = null;
-  
+
   // Only fetch size if sizeId is not "new"
   if (params.sizeId !== "new") {
     size = await prisma.size.findUnique({
